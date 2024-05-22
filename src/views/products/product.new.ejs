@@ -1,0 +1,43 @@
+<% layout('../layouts/boilplates.ejs') %>
+<form action="/product/new" method="POST" enctype="multipart/form-data">
+
+    <h1>new product form</h1>
+    <div class="mb-3">
+        <label for="title" class="form-label">Ten san pham</label>
+        <input type="text" class="form-control" id="title" placeholder="Ten san pham" name="product[title]">
+    </div>
+
+    <div class="mb-3">
+        <label for="price" class="form-label">Gia</label>
+        <input type="number" class="form-control" id="price" placeholder="Gia san pham" name="product[price]">
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Mo ta san pham</label>
+        <textarea class="form-control" id="description" rows="3" name="product[description]"></textarea>
+      </div>
+
+    <div class="mb-3">
+        <label for="weight" class="form-label">Trong luong</label>
+        <input type="number" class="form-control" id="weight" placeholder="Trong luong san pham (gam)" name="product[weight]">
+    </div>
+
+    <select class="form-select" aria-label="Default select example" name="product[category]">
+        <option selected>chọn danh mục cho sản phẩm</option>
+        <% for(let category of categories){ %>
+            <option value="<%=category._id %>"><%= category.name %></option>
+        <% } %>
+    </select>
+
+    <div class="mb-3">
+        <label for="inventory" class="form-label">Số lượng hiện có</label>
+        <input type="number" class="form-control" id="inventory" name="product[inventory]">
+    </div>
+
+    <div class="mb-3">
+        <label for="image" class="form-label">Chọn ảnh cho san pham</label>
+        <input class="form-control" type="file" name="image" multiple>
+    </div>
+
+    <button class="btn btn-success" type="submit">Xac thuc</button>
+</form>

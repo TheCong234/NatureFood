@@ -12,7 +12,7 @@ router.get('/', catchAsync((req, res,next)=>{
 }));
 
 router.get('/new', catchAsync((req, res, next)=>{
-    res.render('category/category.ejs');
+    res.render('category/category.new.ejs');
 }))
 
 router.get('/:id', catchAsync(async(req, res,next)=>{
@@ -28,7 +28,7 @@ router.post('/new', upload.single('image'), catchAsync(async(req, res, next)=>{
     const img = req.file;
     newCategory.image = {url: img.path, filename: img.filename}
     await newCategory.save();
-    res.redirect('/new');
+    res.redirect('category/new');
 }))
 
 router.put('/:id', catchAsync(async(req, res, next)=>{
