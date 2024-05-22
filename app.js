@@ -9,6 +9,7 @@ const engine = require('ejs-mate');
 const mongoose = require('mongoose');
 const DB_URL = process.env.DB_URL;
 const categoryRouter = require('./src/routes/category.route');
+const methodOverride = require('method-override');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
@@ -26,6 +27,7 @@ db.once("open", () => {
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 //API
 app.use('/category', categoryRouter);
 
