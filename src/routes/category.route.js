@@ -6,7 +6,7 @@ const {storage} = require('../cloudinary/index');
 const multer = require('multer');
 const upload = multer({storage: storage});
 
-
+//getter
 router.get('/', catchAsync((req, res,next)=>{
     res.send("heheh");
 }));
