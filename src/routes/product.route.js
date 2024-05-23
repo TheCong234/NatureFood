@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 const catchAsync = require('../utils/catchAsync');
 const ProductSchema = require('../models/product.model');
 const CategorySchema = require('../models/category.model');
@@ -62,7 +62,8 @@ router.put('/:id/edit', catchAsync(async(req, res, next)=>{
 //xóa sản phẩm
 router.delete('/:id', catchAsync(async(req, res, next)=>{
     const {id} = req.params;
-    await ProductSchema.findByIdAndDelete(id);
+    const product = await ProductSchema.findById(id);
+    product.images.forEach(async(i)=>(await cloudinary.uploader.destroy(i.filename)));
     res.redirect('/product');
 }))
 

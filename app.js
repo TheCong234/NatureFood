@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const DB_URL = process.env.DB_URL;
 const categoryRouter = require('./src/routes/category.route');
 const productRouter = require('./src/routes/product.route');
+const reviewRouter = require('./src/routes/review.route');
 const methodOverride = require('method-override');
 
 app.set('view engine', 'ejs');
@@ -34,7 +35,7 @@ app.use(methodOverride('_method'));
 //API
 app.use('/category', categoryRouter);
 app.use('/product', productRouter);
-
+app.use('/product/:id/review', reviewRouter);
 
 app.get('/test', (req, res)=>{
     const datas = "cong nè";
