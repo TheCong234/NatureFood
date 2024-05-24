@@ -28,8 +28,13 @@ router.post('/new', upload.single('image'), catchAsync(async(req, res, next)=>{
     const img = req.file;
     newCategory.image = {url: img.path, filename: img.filename}
     await newCategory.save();
-    res.redirect('category/new');
+    res.redirect('/category/new');
 }))
+
+// router.post('/new', catchAsync(async(req, res, next)=>{
+    
+//     res.redirect('/category/new');
+// }))
 
 router.put('/:id', catchAsync(async(req, res, next)=>{
     const {id} = req.params;
