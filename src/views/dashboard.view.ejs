@@ -1,0 +1,18 @@
+<%layout('../layouts/blank.layout.ejs')%>
+<link rel="stylesheet" href="/css/dashboard.view.css">
+<div class="head mx-auto">
+    <header class="d-flex align-items-center justify-content-between">
+        <span class="badge text-bg-primary text-wrap" style="width: 6rem;">NatureFoods</span>
+        <ul class="d-flex">
+            <li class="mx-2"><a href="/home">Trang chủ</a></li>
+            <li class="mx-2"><a href="/product">Sản phẩm</a></li>
+            <li class="mx-2"><a href="/help">Trợ giúp</a></li>
+            <%if(currentUser){ %>
+                <li class="mx-2"><a href="/user/info"><%= currentUser.username %></a> </li>
+                <li class="mx-2"><a href="/user/logout">Đăng xuất</a></li>
+            <% }else{ %>
+                <li class="mx-2"><a href="/user/login">Đăng nhập</a></li>
+            <% } %>
+        </ul>
+    </header>
+</div>

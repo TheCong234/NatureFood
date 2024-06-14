@@ -1,0 +1,38 @@
+body{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/banner-gia-vi.jpg') ;
+    background-size: cover;
+}
+
+.head{
+    max-width: 60vw;
+}
+
+header{
+    height: 50px;
+}
+
+header ul{
+    height: 100%;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+header ul li{
+    font-weight: 400;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
+    &:hover{
+        color: #22577a;
+        font-weight: 500;
+        border-bottom-color: white ;
+    }
+}
+
+header ul li a{
+    text-decoration: none;
+    color: white;
+}
+

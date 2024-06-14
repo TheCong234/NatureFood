@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="/user/register" method="post" enctype="multipart/form-data">
+<%-layout('../layouts/blank.layout.ejs') %>
+    <form action="/user/register" method="post">
         <h1>Register Page</h1>
         <label for="">user name</label>
         <input type="text" placeholder="username" name="register[username]">
@@ -17,10 +10,5 @@
 
         <input type="phone" placeholder="phone" name="register[phone]">
 
-        <input type="file" name="image">
         <button type="submit">submit</button>
-    </form>
-    
-
-</body>
-</html>
+</form>
