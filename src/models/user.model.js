@@ -46,7 +46,12 @@ const UserSchema = Schema({
     favorite: [{
         type: Schema.Types.ObjectId,
         ref: 'Product',
-    }]
+    }],
+    role:{
+        type: String,
+        enum: ['admin', 'user'],
+        default: 'user'
+    }
 });
 
 UserSchema.pre('save', function(next){
