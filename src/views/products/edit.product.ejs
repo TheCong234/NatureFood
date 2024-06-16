@@ -1,0 +1,52 @@
+<% layout('../layouts/boilplates.ejs') %>
+<form action="/product/<%= product._id %>/edit?_method=put" method="post" enctype="multipart/form-data">
+    <h1>Edit product page</h1>
+    <div>
+        <label for="">Tên sản phẩm</label>
+        <input type="text" name="title" value="<%= product.title %>">
+    </div>
+
+    <div>
+        <label for="">Giá</label>
+        <input type="number" name="price" value="<%= product.price %>">
+    </div>
+
+    <div>
+        <label for="description">Mô tả</label>
+        <textarea name="description" id="description" rows="5"><%= product.description %></textarea>
+    </div>
+
+    <div>
+        <label for="">Cân nặng / chai</label>
+        <input type="number" name="weight" value="<%= product.weight %>">
+    </div>
+    <select name="category" id="category">
+        <% for (let category of categories){ %>
+            <% if(String(product.category) == category._id){ %>
+                <option value="<%= category._id %>" selected><%=category.name %></option>
+            <% }else{ %>
+                <option value="<%= category._id %>"><%=category.name %></option>
+            <% } %>
+        <% } %>
+    </select>
+
+    <div>
+        <% product.images.forEach((image, i)=>{ %>
+            <img src="<%= image.url %>" alt="product Image" height="300">
+            <div>
+                <input type="checkbox" id="imageDelete-<%=i %>" name="imageDelete[]" value="<%= image.filename %>">
+                <label for="imageDelete-<%=i %>">Xóa</label>
+                <hr>
+            </div>
+        <% }) %>
+    </div>
+    <div>
+        <label for="">Thêm ảnh</label>
+        <input type="file" name="image" multiple>
+    </div>
+    <button type="submit">Cập nhật sản phẩm</button>
+    
+</form>
+<form action="/product/<%=product._id %>?_method=delete" method="post">
+    <button type="submit">Xóa sản phẩm</button>
+</form>

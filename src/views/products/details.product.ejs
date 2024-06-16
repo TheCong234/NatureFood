@@ -1,0 +1,63 @@
+<% layout('../layouts/boilplates.ejs') %>
+    <form action="/product/<%=product.id %>/favorite?_method=put" method="post">
+        <button type="submit">Thêm vào yêu thích</button>
+    </form>
+
+    <div>
+        <h1>product details page</h1>
+
+        <div>
+            <label for="">Tên sản phẩm</label>
+            <p>
+                <%=product.title %>
+            </p>
+        </div>
+
+        <div>
+            <label for="">Giá / chai</label>
+            <p>
+                <%=product.price %>
+            </p>
+        </div>
+
+        <div>
+            <label for="">Mô tả</label>
+            <p>
+                <%=product.description %>
+            </p>
+        </div>
+
+        <div>
+            <label for="">Cân nặng / chai</label>
+            <p>
+                <%=product.weight %>
+            </p>
+        </div>
+        <div>
+            <label for="">Số lượng tồn / chai</label>
+            <p>
+                <%=product.inventory %>
+            </p>
+        </div>
+        <div>
+            <label for="">Dánh giá sản phẩm</label>
+            <% for (let review of product.reviews){ %>
+                <div>
+                    <p>Rating: <%= review.rating %>
+                    </p>
+                    <p>Nội dung: <%= review.body %>
+                    </p>
+                    <p>Feedback: <%=review.feedback %>
+                    </p>
+                </div>
+                <% } %>
+        </div>
+
+        <div>
+            <label for="">Ảnh sản phẩm</label>
+            <% for (let image of product.images){ %>
+                <img src="<%=image.url %>" alt="product image" height="200">
+                <% } %>
+        </div>
+
+    </div>

@@ -39,7 +39,7 @@ router.put('/info/:id', UserController.update);
 router.put('/info/:id/avatar', upload.single('image'), UserController.updateAvatar);
 
 //cập nhật danh sách yêu thích
-router.put('/favorite/:productId', UserController.updateFavorite);
+
 
 
 //đăng ký

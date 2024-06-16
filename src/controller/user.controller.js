@@ -95,23 +95,7 @@ const UserController = {
         }
     },
 
-    async updateFavorite(req, res, next){
-        try {
-            const {productId} = req.params;
-            const id = req.user._id;
-            const user =  await UserSchema.findById(id).populate('favorite');
-            const favoriteExist = user.favorite.some(fav => fav._id.toString() === productId) 
-            if(favoriteExist){
-                await user.updateOne({$pull: {favorite: productId}});
-            }else{
-                user.favorite.push(productId);
-            }
-            await user.save();
-            res.redirect(`/product/${id}`);
-        } catch (error) {
-            res.render('error/index.ejs', {error});
-        }
-    }
+    
 
 }
 
