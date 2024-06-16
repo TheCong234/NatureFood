@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
-const catchAsync = require('../utils/catchAsync');
 const UserSchema = require('../models/user.model');
 const passport = require('passport');
 const LocalStratege = require('passport-local');
@@ -12,55 +11,38 @@ const {isLoggedIn, storeReturnTo} = require('../middleware');
 passport.use(new LocalStratege(UserSchema.authenticate()));
 passport.serializeUser(UserSchema.serializeUser());
 passport.deserializeUser(UserSchema.deserializeUser());
+const UserController = require('../controller/user.controller');
 
 //form đăng nhập
-router.get('/login', (req, res)=>{
-    res.render('user/user.login.ejs');
-})
+router.get('/login', UserController.renderLogin);
 
 //form đăng ký
-router.get('/register', (req, res)=>{
-    res.render('user/user.register.ejs');
-}) 
+router.get('/register', UserController.renderRegister); 
 
 //form quên mật khẩu
-router.get('/forgot', catchAsync((req, res, next)=>{
-    res.render('user/user.forgot.ejs');
-}))
+router.get('/forgot', UserController.renderForgot);
 
 //Thông tin người dùng
-router.get('/info', isLoggedIn, catchAsync((req, res, next)=>{
-    res.send(req.user);
-}))
+router.get('/info/:id', UserController.getUserById);
+router.get('/info', isLoggedIn, UserController.getCurrentUser);
 
-router.get('/logout', (req, res, next)=>{
-    req.logout(function(err){
-        if(err){
-            return next(err);
-        }
-        req.flash('success', 'Goodbye');
-        return res.redirect('/home');
-    })
-})
+router.get('/logout', storeReturnTo, UserController.logout)
 
 //đăng nhập
-router.post('/login',storeReturnTo, passport.authenticate('local', {failureFlash: true, failureRedirect:'/user/login'}), catchAsync(async(req, res, next)=>{
-    const to = res.locals.returnTo || '/home';
-    req.flash('success', `Chào mừng ${req.body.username} quay trở lại`);
-    res.redirect(to);
-}))
+router.post('/login',
+    storeReturnTo, 
+    passport.authenticate('local', {failureFlash: true, failureRedirect:'/user/login'}), 
+    UserController.login);
+
+//cập nhật thông tin người dùng
+router.put('/info/:id', UserController.update);
+router.put('/info/:id/avatar', upload.single('image'), UserController.updateAvatar);
+
+//cập nhật danh sách yêu thích
+
+
 
 //đăng ký
-router.post('/register', catchAsync(async(req, res, next)=>{
-    const{username, email, phone, password} = req.body.register;
-    const user = new UserSchema({username, email, phone});
-    const newUser = await UserSchema.register(user, password);
-
-    req.login(newUser, err =>{
-        if(err) return next();
-        res.redirect('/product');
-    })
-    res.render('user/user.login.ejs');
-}))
+router.post('/register', UserController.register);
 
 module.exports = router;

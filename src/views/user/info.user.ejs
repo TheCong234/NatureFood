@@ -1,0 +1,46 @@
+<%-layout('../layouts/blank.layout.ejs') %>
+<form action="">
+    <h1>User info</h1>
+    <table>
+        <tr>
+            <td>Email</td>
+            <td><%= user.email %></td>
+        </tr>
+
+        <tr>
+            <td>Số điện thoại</td>
+            <td><%= user.phone %></td>
+        </tr>
+
+        <tr>
+            <td>Tên đăng nhập</td>
+            <td><%= user.username %></td>
+        </tr>
+
+        <tr>
+            <td>Ngày tạo</td>
+            <td><%= user.createAt %></td>
+        </tr>
+
+        <tr>
+            <td>Ngày thay đổi gần nhất</td>
+            <td><%= user.updateAt %></td>
+        </tr>
+    </table>
+</form>
+
+<form action="/user/info/<%=user._id %>/avatar?_method=put" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>Avatar</td>
+            <td>
+                <% if(user.image?.url){ %>
+                    <img src="<%=user.image?.url %>" alt="Ảnh đại diện">
+                <% }%>
+                <input type="file" name="image">
+                
+            </td>
+        </tr>
+    </table>
+    <button type="submit">Thay đổi avatar</button>
+</form>

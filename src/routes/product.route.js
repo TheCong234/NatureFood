@@ -3,68 +3,34 @@ const router = express.Router({mergeParams: true});
 const catchAsync = require('../utils/catchAsync');
 const ProductSchema = require('../models/product.model');
 const CategorySchema = require('../models/category.model');
+const ProductController = require('../controller/product.controller');
 
 const {storage, cloudinary} = require('../cloudinary/index');
 const multer = require('multer');
 const upload = multer({storage: storage});
 
 //trang sản phẩm
-router.get('/', catchAsync(async(req, res, next)=>{
-    const products = await ProductSchema.find({});
-    const categories = await CategorySchema.find({});
-    res.render('products',{products, categories});
-}))
+router.get('/', ProductController.getAll);
 
 //form tạo mới sản phẩm
-router.get('/new', catchAsync(async(req, res, next)=>{
-    const categories = await CategorySchema.find({});
-    res.render('products/product.new.ejs',{categories});
-}))
+router.get('/new', ProductController.renderCreate);
 
 //form sửa sản phẩm
-router.get('/:id/edit', catchAsync(async(req, res, next)=>{
-    const {id} = req.params;
-    const product = await ProductSchema.findById(id);
-    res.render('products/product.edit.ejs', {product});
-}))
+router.get('/:id/edit', ProductController.renderUpdate);
 
 //form chi tiết sản phẩm
-router.get('/:id', catchAsync(async(req, res, next)=>{
-    const {id} = req.params;
-    const product = await ProductSchema.findById(id);
-    res.render('products/product.detail.ejs', {product});
-}))
+router.get('/:id', ProductController.renderDetails);
+
+router.put('/:id/favorite', ProductController.updateFavorite);
 
 //tạo mới sản phẩm
-router.post('/new', upload.array('image'), catchAsync(async(req, res, next)=>{
-    const newProduct = new ProductSchema(req.body.product);
-    newProduct.images = req.files.map(f => ({url: f.path, filename: f.filename}));
-    await newProduct.save();
-    res.redirect('/product/new');
-}));
+router.post('/new', upload.array('image'), ProductController.createProduct);
 
 //sửa sản phẩm
-router.put('/:id/edit', catchAsync(async(req, res, next)=>{
-    const {id} = req.params;
-    const product = await ProductSchema.findByIdAndUpdate(id, req.body);
-    const imgs = req.files.map(f=>({url: f.path, filename: f.filename}));
-    product.images.push(...imgs);
-    if(req.body.imageDelete){
-        for(let filename of req.body.imageDelete){
-            await cloudinary.uploader.destroy(filename);
-        }
-        await product.updateOne({$pull: {images: {filename: {$in: req.body.imageDelete}}}});
-    }
-    res.redirect(`/product/${id}`);
-}))
+router.put('/:id/edit', upload.array('image'), ProductController.updateProduct);
 
 
 //xóa sản phẩm
-router.delete('/:id', catchAsync(async(req, res, next)=>{
-    const {id} = req.params;
-    const product = await ProductSchema.findById(id);
-    product.images.forEach(async(i)=>(await cloudinary.uploader.destroy(i.filename)));
-    res.redirect('/product');
-}))
+router.delete('/:id', ProductController.deleteProduct);
 
 module.exports = router;

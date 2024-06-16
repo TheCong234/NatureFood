@@ -30,4 +30,9 @@ const CategorySchema = mongoose.Schema({
     image: ImageSchema
 });
 
+// CategorySchema.pre('save', function(next){
+//     this.updateAt = new Date();
+//     next();
+// });
+
 module.exports = mongoose.model('Category', CategorySchema);
