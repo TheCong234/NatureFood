@@ -5,28 +5,24 @@
 
     <div>
         <h1>product details page</h1>
-
         <div>
             <label for="">Tên sản phẩm</label>
             <p>
                 <%=product.title %>
             </p>
         </div>
-
         <div>
             <label for="">Giá / chai</label>
             <p>
                 <%=product.price %>
             </p>
         </div>
-
         <div>
             <label for="">Mô tả</label>
             <p>
                 <%=product.description %>
             </p>
         </div>
-
         <div>
             <label for="">Cân nặng / chai</label>
             <p>
@@ -41,16 +37,22 @@
         </div>
         <div>
             <label for="">Dánh giá sản phẩm</label>
-            <% for (let review of product.reviews){ %>
-                <div>
-                    <p>Rating: <%= review.rating %>
-                    </p>
-                    <p>Nội dung: <%= review.body %>
-                    </p>
-                    <p>Feedback: <%=review.feedback %>
-                    </p>
-                </div>
-                <% } %>
+            <% if(product.reviews.length > 0){ %>
+                <% for (let review of product.reviews){ %>
+                    <div>
+                        <p>Rating: <%= review.rating %>
+                        </p>
+                        <p>Nội dung: <%= review.body %>
+                        </p>
+                        <p>Feedback: <%=review.feedback %>
+                        </p>
+                        <form action="/product/<%=product._id %>/review/<%=review._id %>?_method=delete" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+            <% }}else{ %>
+                <p>Chưa có đánh giá nào</p>
+            <% } %>
         </div>
 
         <div>
@@ -59,5 +61,17 @@
                 <img src="<%=image.url %>" alt="product image" height="200">
                 <% } %>
         </div>
+
+        <form action="/product/<%= product._id %>/review" method="post">
+            <div>
+                <label for="">Rating</label>
+                <input type="range" value="5" max="5" min="1" name="review[rating]">
+            </div>
+            <div>
+                <label for="">Nội dung đánh giá</label>
+                <textarea name="review[body]" id="body" rows="5" cols="100%"></textarea>
+            </div>
+            <button type="submit">Thêm đánh giá</button>
+        </form>
 
     </div>
