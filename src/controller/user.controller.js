@@ -3,15 +3,15 @@ const UserSchema = require('../models/user.model');
 
 const UserController = {
     async renderLogin(req, res){
-        res.render('user/user.login.ejs')
+        res.render('user/login.user.ejs')
     },
 
     async renderRegister(req, res) {
-        res.render('user/user.register.ejs');
+        res.render('user/register.user.ejs');
     },
 
     async renderForgot(req, res){
-        res.render('user/user.forgot.ejs');
+        res.render('user/forgot.user.ejs');
     },
 
     async getCurrentUser(req, res){
