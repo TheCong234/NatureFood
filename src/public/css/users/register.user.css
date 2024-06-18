@@ -1,5 +1,5 @@
 
-.form-login{
+.form{
     width: 1000px;
     padding: 40px 0;
     display: flex;
@@ -11,12 +11,12 @@
 
 
 
-.form-login_parts{
+.form-parts{
     width: 50%;
     margin: 0 50px;
 }
 
-.login-header{
+.form-header{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,7 +78,11 @@ h1{
     border: 1.5px solid green;
 }
 
-
+.notify-email{
+    color: red;
+    font-size: 1.3rem;
+    margin-top: 5px;
+}
    
 .input-group_input:focus ~ label, input:valid ~ .input-group_lable{
     transform: translateY(-155%) scale(0.9);
@@ -88,9 +92,8 @@ h1{
 }
 
 .form-control_button {
-    width: 100%;
     margin-top: 20px;
-    padding: 1rem;
+    padding: 10px 25px;
     border: unset;
     border-radius: 10px;
     color: #212121;
@@ -99,6 +102,8 @@ h1{
     position: relative;
     font-weight: 1000;
     font-size: 17px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
     transition: all 250ms;
     overflow: hidden;
 }
@@ -111,64 +116,18 @@ h1{
     height: 100%;
     width: 0;
     border-radius: 15px;
-    background-color: #212121;
+    background-color: #50d93b;
     z-index: -1;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
     transition: all 250ms
 }
    
 .form-control_button:hover {
     color: #e8e8e8;
-    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
 }
    
 .form-control_button:hover::before {
     width: 100%;
-}
-
-/* Đăng nhập với gg */
-.form-control_button-gg {
-    margin-top: 10px;
-    width: 100%;
-    font-size: 17px;
-    background-color: #eee;
-    border: none;
-    padding: 1rem;
-    border-radius: 1rem;
-    color: lightcoral;
-    box-shadow: 0 0.4rem #dfd9d9;
-    cursor: pointer;
-}
-   
-.form-control_button-gg:active {
-    color: white;
-    box-shadow: 0 0.2rem #dfd9d9;
-    transform: translateY(0.2rem);
-}
-   
-.form-control_button-gg:hover:not(:disabled) {
-    background: lightcoral;
-    color: white;
-    text-shadow: 0 0.1rem #bcb4b4;
-}
-   
-.form-control_button-gg:disabled {
-    cursor: auto;
-    color: grey;
-}
-
-.link-group{
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.link-group a{
-    text-decoration: none;
-    color: black;
-    font-size: 1.4rem;
-    &:hover{
-        color: #1a73e8;
-    }
 }
 
