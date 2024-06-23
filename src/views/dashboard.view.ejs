@@ -1,18 +1,45 @@
-<%layout('../layouts/blank.layout.ejs')%>
-<link rel="stylesheet" href="/css/dashboard.view.css">
-<div class="head mx-auto">
-    <header class="d-flex align-items-center justify-content-between">
-        <span class="badge text-bg-primary text-wrap" style="width: 6rem;">NatureFoods</span>
-        <ul class="d-flex">
-            <li class="mx-2"><a href="/home">Trang chủ</a></li>
-            <li class="mx-2"><a href="/product">Sản phẩm</a></li>
-            <li class="mx-2"><a href="/help">Trợ giúp</a></li>
-            <%if(currentUser){ %>
-                <li class="mx-2"><a href="/user/info"><%= currentUser.username %></a> </li>
-                <li class="mx-2"><a href="/user/logout">Đăng xuất</a></li>
-            <% }else{ %>
-                <li class="mx-2"><a href="/user/login">Đăng nhập</a></li>
-            <% } %>
-        </ul>
-    </header>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/dashboard.view.css">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div class="dashboard">
+        <header class="navbar">
+            <div class="navbar-brand">
+                <img src="/images/logo.jpg" alt="Logo" height="40px">
+                <a href="/home">Nature Foods</a>
+            </div>
+            
+            <ul class="navbar_item-list">
+                <li class="navbar_item-list-item"><a href="/home">Trang chủ</a></li>
+                <li class="navbar_item-list-item"><a href="/product">Sản phẩm</a></li>
+                <li class="navbar_item-list-item"><a href="/help">Trợ giúp</a></li>
+                <li class="navbar_item-list-item"><a href="/home">Về chúng tôi</a></li>
+            </ul>
+            <ul class="navbar_item-list">
+                <%if(currentUser){ %>
+                    <li class="navbar_item-list-item"><a href="/user/info">
+                            <%= currentUser.username %>
+                        </a> </li>
+                    <li class="navbar_item-list-item"><a href="/user/logout">Đăng xuất</a></li>
+                    <% }else{ %>
+                        <li class="navbar_item-list-item"><a href="/user/login">Đăng nhập</a></li>
+                        <% } %>
+            </ul>
+        </header>
+
+        <div class="content">
+            <h1>Welcome to Nature Foods</h1>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, magni voluptatibus pariatur distinctio iure quas, 
+                laborum quod blanditiis mollitia aliquid accusantium reprehenderit tempora! Quidem veniam laboriosam deleniti tenetur iste quaerat!</p>
+        </div>
+    </div>
+</body>
+
+</html>

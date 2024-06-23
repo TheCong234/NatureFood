@@ -49,7 +49,7 @@ const UserController = {
 
     async register(req, res, next){
         try {
-            const{username, email, phone, password} = req.body.register;
+            const{username, email, phone, password} = req.body;
             const user = new UserSchema({username, email, phone});
             const newUser = await UserSchema.register(user, password);
 

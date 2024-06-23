@@ -4,23 +4,69 @@
 <form class="form-login" action="/user/login" method="post">
     <div class="form-login_parts">
         <div class="login-header">
+            <img src="/images/logo.jpg" alt="Nature Logo" height="40" width="70">
             <h1>Đăng nhập</h1>
-            <img src="/images/logo.jpg" alt="Nature Logo" height="80" width="130">
         </div>
-        <div>
-            <label class="form-control form-control_lable" for="username">Tên đăng nhập</label>
-            <input class="form-control form-control_input" type="text" placeholder="username" id="username" name="username">
+        <div class="input-group">
+            <input required type="text" name="username" autocomplete="off" class="input-group_input" id="username">
+            <label class="input-group_lable">Tên đăng nhập</label>
+            <i class="fa-solid fa-user icon"></i>
         </div>
-    
-        <div>
-            <label class="form-control form-control_lable" for="password">Mật khẩu</label>
-            <input class="form-control form-control_input" type="password" placeholder="password" id="password" name="password">
+       
+        <div class="input-group">
+            <input required type="password" name="password" autocomplete="off" class="input-group_input" id="password">
+            <label class="input-group_lable">Mật khẩu</label>
+            <i class="fa-solid fa-eye-slash icon display-block" id="eyeSlash"></i>
+            <i class="fa-solid fa-eye icon display-none" id="eye" ></i>
         </div>
-        <button class="form-control form-control_button">Đăng nhập</button>
-
+        <div style="text-align: center;">
+            <button class=" form-control_button" id="login" type="submit">Đăng nhập</button>
+            <button class="form-control_button-gg">Đăng nhập với Google <i class="fa-brands fa-google"></i></button>
+        </div>
+        <div class="link-group">
+            <a href="/user/register">Đăng ký tài khoản</a>
+            <a href="/user/forgot">Quên mật khẩu</a>
+        </div>
     </div>
 
     <div class="form-login_parts">
         <img src="/images/login-vector.jpg" alt="Ảnh Login" width="100%">
     </div>
 </form>
+
+<script>
+    const usernameInput = document.getElementById('username')
+    const passwordInput = document.getElementById('password');
+    const login = document.getElementById('login')
+
+    login.addEventListener('click', (evt)=>{
+        const usernameValue = usernameInput.value.trim();
+        const passwordValue = passwordInput.value.trim();
+        if(usernameValue.length < 1 || passwordValue.length < 1){
+            evt.preventDefault();
+            return alert("Vui lòng điển đầy đủ thông tin");
+        }
+    })
+
+    // show password
+    const eyeSlash = document.getElementById('eyeSlash');
+    const eye = document.getElementById('eye');
+
+    eye.addEventListener('click', ()=>{
+        // text => password
+        eye.classList.replace('display-block', 'display-none');
+        eyeSlash.classList.replace( 'display-none','display-block')
+        passwordInput.type = 'password';
+        passwordInput.focus();
+
+    })
+
+    eyeSlash.addEventListener('click', ()=>{
+        // password => text
+        eye.classList.replace( 'display-none','display-block')
+        eyeSlash.classList.replace('display-block', 'display-none');
+        passwordInput.type = 'text';
+        passwordInput.focus();
+    })
+    
+</script>
