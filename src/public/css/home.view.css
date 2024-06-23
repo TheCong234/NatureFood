@@ -1,0 +1,74 @@
+
+
+main{
+    padding: 0 2.5%;
+}
+
+/* banner */
+header{
+    margin: 10px 0;
+    width: 100%;
+    display: flex;
+}
+
+.banner-right{
+    margin-left: 15px;
+    width: 50%;
+    display: inline-grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    row-gap: 15px;
+    column-gap: 15px;
+}
+
+.banner-right__item img{
+    width: 100%;
+    height: 100%;
+}
+
+.banner-left{
+    width: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel{
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    .carousel-item{
+        min-width: 100%;
+        img{
+            object-fit: fill;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    
+}
+
+.carousel-control{
+    position: absolute;
+    top: 50%;
+    background-color: rgba(65, 65, 65, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 2rem;
+    height: 50px;
+    width: 50px;
+    
+}
+
+.carousel-control.prev{
+    left: 10px;
+}
+
+.carousel-control.next{
+    right: 10px;
+}
+
+
+
+

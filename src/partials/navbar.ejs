@@ -1,1 +1,33 @@
-<div>navbar</div>
+<link rel="stylesheet" href="/css/components/navbar.component.css">
+<nav>
+    <div class="navbar-branch">
+        <img src="/images/logo.jpg" alt="Logo" height="40px">
+        <div class="navbar-branch__name">
+            <h3>Nature Foods</h3>
+            <p>Thực phẩm từ thiên nhiên</p>
+        </div>
+        
+    </div>
+
+    <div class="navbar-contents">
+        <ul class="navbar-links">
+            <li class="navbar-links__item"><a href="/home">Trang chủ</a></li>
+            <li class="navbar-links__item"><a href="/product">Sản phẩm</a></li>
+            <li class="navbar-links__item"><a href="/">Gia vị</a></li>
+            <li class="navbar-links__item"><a href="/">Làm đẹp</a></li>
+            <li class="navbar-links__item"><a href="/">Blog</a></li>
+        </ul>
+
+        <ul class="navbar-links">
+            <% if(currentUser){ %>
+                <li class="navbar-links__item"><a href=""><i class="fa-solid fa-bell"></i>Thông báo</a></li>
+                <li class="navbar-links__item"><a href=""><i class="fa-solid fa-cart-shopping"></i>Giỏ hàng</a></li>
+                <li class="navbar-links__item"><a href="/user/info"><i class="fa-solid fa-user"></i><%= currentUser.username %></a></li>
+                <li class="navbar-links__item"><a href="/user/logout"><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a></li>
+            <% }else{ %>
+                <li class="navbar-links__item"><a href="/user/login"><i class="fa-solid fa-right-to-bracket"></i>Đăng nhập</a></li>
+                <li class="navbar-links__item"><a href="/user/register"><i class="fa-solid fa-registered"></i>Đăng ký</a></li>
+            <% } %>
+        </ul>
+    </div>
+</nav>
