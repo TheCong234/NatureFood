@@ -18,7 +18,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const ExpressError = require('./src/utils/expressError');
 const MongoStore = require('connect-mongo');
-const catchAsync = require('./src/utils/catchAsync');
+const CategoryModel = require('./src/models/category.model');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
@@ -79,8 +79,9 @@ app.use('/product', productRouter);
 app.use('/product/:id/review', reviewRouter);
 app.use('/user', userRouter);
 
-app.get('/home', (req, res)=>{
-    res.render('home.view.ejs');
+app.get('/home', async(req, res)=>{
+    const categories = await CategoryModel.find({});
+    res.render('home.view.ejs', {categories});
 })
 
 app.get('/dashboard', (req, res)=>{

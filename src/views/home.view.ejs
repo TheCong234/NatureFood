@@ -7,6 +7,7 @@
             <div class="carousel">
                 <div class="carousel-item active">
                     <img src="https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg" alt="">
+                    
                 </div>
                 <div  class="carousel-item">
                     <img src="https://us.123rf.com/450wm/photochicken/photochicken2008/photochicken200800065/153425631-pritty-jeune-photographe-asiatique-fille-adolescente-voyage-avec-appareil-photo-prendre-une-photo-de.jpg" alt="">
@@ -22,45 +23,61 @@
         <div class="banner-right">
             <div class="banner-right__item">
                 <img src="https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg" alt="">
+                <div class="details">
+                    <span class="title">Lorem Ipsum Dolor</span>
+                    <span class="info">Quisque vel felis lectus donec vitae dapibus magna</span>
+                </div>
             </div>
             <div class="banner-right__item">
                 <img src="https://us.123rf.com/450wm/photochicken/photochicken2008/photochicken200800065/153425631-pritty-jeune-photographe-asiatique-fille-adolescente-voyage-avec-appareil-photo-prendre-une-photo-de.jpg" alt="">
+                <div class="details">
+                    <span class="title">Lorem Ipsum Dolor</span>
+                    <span class="info">Quisque vel felis lectus donec vitae dapibus magna</span>
+                </div>
             </div>
             <div class="banner-right__item">
                 <img src="https://www.usnews.com/object/image/00000166-e559-dff6-a5ff-e5fddef90000/1-intro-getty.jpg" alt="">
+                <div class="details">
+                    <span class="title">Lorem Ipsum Dolor</span>
+                    <span class="info">Quisque vel felis lectus donec vitae dapibus magna</span>
+                </div>
             </div>
             <div class="banner-right__item">
                 <img src="https://freerangestock.com/sample/130131/red-hair-woman-with-camera-.jpg" alt="">
+                <div class="details">
+                    <span class="title">Lorem Ipsum Dolor</span>
+                    <span class="info">Quisque vel felis lectus donec vitae dapibus magna</span>
+                </div>
             </div>
         </div>
     </header>
+    <div class="content">
+        <h1 class="content-title">Danh mục</h1>
+
+        
+        <div class="category">
+            <div class="category-list">
+                <% for(let category of categories){ %>
+                    <div class="category-item">
+                        <div class="category-item__img">
+                            <img src="<%=category.image.url %>" alt="Ảnh danh mục">
+                        </div>
+                        <span class="category-item__name"><%=category.name %></span>
+                        <span class="category-item__description"><%=category.description %></span>
+                    </div>
+                <% } %>
+            </div>
+            <span class="category-control prev" onclick="prevCategory()">&lt;</span>
+            <span class="category-control next" onclick="nextCategory()">&gt;</span>
+        </div>
+        
+        
+
+    </div>
 
 
 </main>
 
-<script>
-    let currentIndex = 0;
+<script src="/js/home.view.js"></script>
 
-    function showSlide(index) {
-        const slides = document.querySelectorAll('.carousel-item');
-        const totalSlides = slides.length;
-        if (index >= totalSlides) {
-            currentIndex = 0;
-        } else if (index < 0) {
-            currentIndex = totalSlides - 1;
-        } else {
-            currentIndex = index;
-        }
-        const newTransformValue = -currentIndex * 100 + '%';
-        document.querySelector('.carousel').style.transform = `translateX(${newTransformValue})`;
-    }
 
-    function nextSlide() {
-        showSlide(currentIndex + 1);
-    }
-
-    function prevSlide() {
-        showSlide(currentIndex - 1);
-    }
-
-</script>
