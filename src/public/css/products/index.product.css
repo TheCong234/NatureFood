@@ -1,0 +1,147 @@
+.container{
+    margin: 100px 5% 20px 5%;
+    background-color: var(--color-background);
+    padding: 0 5px;
+}
+
+header{
+    width: 100%;
+    height: 50vh;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+
+.carousel{
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    .carousel-item{
+        min-width: 100%;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    
+}
+
+.carousel-control{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(65, 65, 65, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 2rem;
+    height: 50px;
+    width: 50px;
+    
+}
+
+.carousel-control.prev{
+    left: 10px;
+}
+
+.carousel-control.next{
+    right: 10px;
+}
+
+/* content */
+.content{
+    margin: 30px 0;
+    display: flex;
+    .content-aside{
+        margin-bottom: 10px;
+        padding: 0 6px;
+        width: 20%;
+        background-color: var(--color-white);
+    }
+    .content-main{
+        width: 100%;
+        margin-left: 10px;
+    }
+    
+}
+
+.aside-title{
+    margin: 25px 0;
+    
+}
+
+.aside-title__category-item{
+    line-height: 2;
+    font-size: 18px;
+}
+
+
+/* filter */
+.content-main__filter{
+    background-color: var(--color-grey);
+    height: 90px;
+    display: flex;
+    align-items: center;
+}
+
+/* products */
+.content-main__products{
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    gap: 10px;
+}
+
+
+
+.content-main__products-card{
+    background-color: var(--color-white);
+    height: 300px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .image{
+        display: flex;
+        justify-content: center;
+        img{
+            height: 190px;
+            object-fit: cover;
+            margin: 0 auto;
+        }
+    
+    }
+    .card-product__title{
+        margin-top: 8px;
+        font-size: 18px;
+    }
+
+    .card-product__price{
+        color: var(--color-red);
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    .card-product__weight{
+        margin-top: 4px;
+    }
+
+    .group__price-unit{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        position: absolute;
+        bottom: 10px;
+        left: 0px;
+        padding: 0 4px;
+    }
+
+    &:hover{
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    }
+}
