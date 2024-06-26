@@ -7,7 +7,12 @@ const ProductController = {
     async renderCreate(req, res, next){
         try {
             const categories = await CategoryModel.find({});
-            res.render('products/new.product.ejs',{categories});
+            res.render('products/new.product.ejs',
+                {
+                    categories,
+                    title: 'Tạo mới sản phẩm',
+                    cssPath: '',
+                });
         } catch (error) {
             res.render('error/index.ejs', {error});
         }
@@ -51,7 +56,14 @@ const ProductController = {
         try {
             const products = await ProductModel.find({}).populate('images');
             const categories = await CategoryModel.find({});
-            res.render('products',{products, categories});
+            res.render('products/index.ejs',
+                {
+                    title: 'Sản phẩm',
+                    cssPath: 'css/products/index.product.css',
+                    products, 
+                    categories,
+                    
+                });
         } catch (error) {
             res.render('error/index.ejs', {error});
         }

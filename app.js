@@ -81,7 +81,13 @@ app.use('/user', userRouter);
 
 app.get('/home', async(req, res)=>{
     const categories = await CategoryModel.find({});
-    res.render('home.view.ejs', {categories});
+    
+    res.render('home.view.ejs', 
+        {
+            categories, 
+            title: 'Trang chủ', 
+            cssPath: 'css/home.view.css'
+        });
 })
 
 app.get('/dashboard', (req, res)=>{

@@ -7,12 +7,14 @@
 nav{
     background-color: var(--color-white);
     display: flex;
-    /* margin: 0 5%; */
     padding: 0 4px;
     border-radius: 4px;
-    margin-top: 10px;
     height: 60px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
 }
 
 .navbar-branch {
