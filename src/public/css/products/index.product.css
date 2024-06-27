@@ -53,11 +53,10 @@ header{
 
 /* content */
 .content{
-    margin: 30px 0;
+    padding: 30px 6px;
     display: flex;
     .content-aside{
-        margin-bottom: 10px;
-        padding: 0 6px;
+        padding: 6px;
         width: 20%;
         background-color: var(--color-white);
     }
@@ -73,21 +72,74 @@ header{
     
 }
 
-.aside-title__category-item{
+.aside__category-item{
     line-height: 2;
     font-size: 18px;
+    &:hover{
+        color: var(--color-primary);
+        cursor: pointer;
+    }
 }
 
 
 /* filter */
 .content-main__filter{
     background-color: var(--color-grey);
-    height: 90px;
+    height: 80px;
     display: flex;
     align-items: center;
+    padding: 0 10px;
+    .filter__title{
+        font-size: 18px;
+        margin: 0 10px;
+    }
+    .filter__price-group{
+        position: relative;
+        .button-price{
+            width: 200px;
+            align-items: start;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            .button-price__symbol{
+                position: absolute;
+                top: 8px;
+                right: 14px;
+                font-size: 20px;
+            }
+            
+        }
+        .sort__price{
+            width: 200px;
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            padding: 8px 16px;
+            margin: 0px 6px;
+            top: 85%;
+            left: 0;
+            font-size: 18px;
+            background-color: var(--color-white);
+            border-radius: 6px;
+            z-index: 2;
+            line-height: 1.5;
+            .sort__price-item{
+                &:hover{
+                    color: var(--color-primary);
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &:hover .sort__price{
+            display: flex;
+        }
+
+    }
 }
 
 /* products */
+
 .content-main__products{
     margin-top: 10px;
     display: grid;
@@ -143,5 +195,22 @@ header{
 
     &:hover{
         box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    }
+}
+
+/* pagination */
+.pagination{
+    display: flex;
+    justify-content: center;
+    height: 32px;
+    .pagination-options{
+        color: rgb(77, 74, 74);
+        height: 100%;
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        .pagination-item{
+            padding: 0 6px;
+        }
     }
 }
