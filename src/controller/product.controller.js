@@ -33,7 +33,12 @@ const ProductController = {
         try {
             const {id} = req.params;
             const product = await ProductModel.findById(id).populate('reviews');
-            res.render('products/details.product.ejs', {product});
+            res.render('products/details.product.ejs', 
+                {
+                    title: 'Chi tiết sản phẩm',
+                    cssPath: '/css/products/details.product.css',
+                    product,
+                });
         } catch (error) {
             res.render('error/index.ejs', {error});
         }
@@ -59,7 +64,7 @@ const ProductController = {
             res.render('products/index.ejs',
                 {
                     title: 'Sản phẩm',
-                    cssPath: 'css/products/index.product.css',
+                    cssPath: '/css/products/index.product.css',
                     products, 
                     categories,
                     

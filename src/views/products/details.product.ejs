@@ -1,42 +1,44 @@
 <% layout('../layouts/boilplates.ejs') %>
+<div class="container">
     <form action="/product/<%=product.id %>/favorite?_method=put" method="post">
         <button type="submit">Thêm vào yêu thích</button>
     </form>
 
-    <div>
-        <h1>product details page</h1>
+    <main>
+        <header class="">
+            <div class="product-images">
+                <div class="image-show">
+                    <% for (let image of product.images){ %>
+                        <img src="<%=image.url %>" alt="product image">
+                    <% break} %>
+                </div>
+                <div class="image-list">
+                    <% for (let image of product.images){ %>
+                        <img src="<%=image.url %>" alt="product image" height="200">
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="product-details">
+                <h1><%=product.title %></h1>
+                <ul class="overview-group">
+                    <li>&#9733;(4.9)</li>
+                    <li><%=product.inventory %></li>
+                    <li>Đơn vị tính: </li>
+                </ul>
+                <div class="product-price">₫<%=(product.price.toLocaleString('vi-VN')) %></div>
+                <div >Trọng lượng: <%=product.weight %></div>
+                
+                
+                <div class="product-description">
+                    <%=product.description %>
+                </div>
+            </div>
+        </header>
+
+        <!-- review -->
         <div>
-            <label for="">Tên sản phẩm</label>
-            <p>
-                <%=product.title %>
-            </p>
-        </div>
-        <div>
-            <label for="">Giá / chai</label>
-            <p>
-                <%=product.price %>
-            </p>
-        </div>
-        <div>
-            <label for="">Mô tả</label>
-            <p>
-                <%=product.description %>
-            </p>
-        </div>
-        <div>
-            <label for="">Cân nặng / chai</label>
-            <p>
-                <%=product.weight %>
-            </p>
-        </div>
-        <div>
-            <label for="">Số lượng tồn / chai</label>
-            <p>
-                <%=product.inventory %>
-            </p>
-        </div>
-        <div>
-            <label for="">Dánh giá sản phẩm</label>
+            <span >Dánh giá sản phẩm</span>
             <% if(product.reviews.length > 0){ %>
                 <% for (let review of product.reviews){ %>
                     <div>
@@ -55,23 +57,35 @@
             <% } %>
         </div>
 
+        <!-- related products -->
+        <div></div>
+    </main>
+
+    <div>
+        
+        
+    
+        
+        
+        
+
         <div>
-            <label for="">Ảnh sản phẩm</label>
-            <% for (let image of product.images){ %>
-                <img src="<%=image.url %>" alt="product image" height="200">
-                <% } %>
+            <span >Ảnh sản phẩm</span>
+            
         </div>
 
         <form action="/product/<%= product._id %>/review" method="post">
             <div>
-                <label for="">Rating</label>
+                <span >Rating</span>
                 <input type="range" value="5" max="5" min="1" name="review[rating]">
             </div>
             <div>
-                <label for="">Nội dung đánh giá</label>
+                <span >Nội dung đánh giá</span>
                 <textarea name="review[body]" id="body" rows="5" cols="100%"></textarea>
             </div>
             <button type="submit">Thêm đánh giá</button>
         </form>
 
     </div>
+
+</div>

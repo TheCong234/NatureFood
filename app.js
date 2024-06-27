@@ -20,6 +20,7 @@ const ExpressError = require('./src/utils/expressError');
 const MongoStore = require('connect-mongo');
 const CategoryModel = require('./src/models/category.model');
 
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
 
@@ -64,7 +65,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 app.use(passport.initialize());
-app.use(passport.session())
+app.use(passport.session());
 
 app.use((req, res, next)=>{
     res.locals.currentUser = req.user;
@@ -93,6 +94,16 @@ app.get('/home', async(req, res)=>{
 app.get('/dashboard', (req, res)=>{
     res.render('dashboard.view.ejs');
 })
+
+app.all('*', (req, res, next) => {
+    res.render('test.ejs',
+        {
+            title:'test',
+            cssPath: 'test'
+        });
+    
+})
+
 
 
 app.listen(3000, ()=>{
