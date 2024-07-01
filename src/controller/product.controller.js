@@ -11,7 +11,7 @@ const ProductController = {
                 {
                     categories,
                     title: 'Tạo mới sản phẩm',
-                    cssPath: '',
+                    cssPath: '/css/products/new.product.css',
                 });
         } catch (error) {
             res.render('error/index.ejs', {error});
@@ -23,7 +23,13 @@ const ProductController = {
             const {id} = req.params;
             const product = await ProductModel.findById(id);
             const categories = await CategoryModel.find({});
-            res.render('products/edit.product.ejs', {product, categories});
+            res.render('products/edit.product.ejs', 
+                {
+                    title: 'Chỉnh sửa sản phẩm',
+                    cssPath: '/css/edit.product.css',
+                    product, 
+                    categories
+                });
         } catch (error) {
             res.render('error/index.ejs', {error});
         }
@@ -33,12 +39,50 @@ const ProductController = {
         try {
             const {id} = req.params;
             const product = await ProductModel.findById(id).populate('reviews');
+            const relatedProducts = await ProductModel.find({category: product.category}).limit(10).populate('images');
             res.render('products/details.product.ejs', 
                 {
                     title: 'Chi tiết sản phẩm',
                     cssPath: '/css/products/details.product.css',
                     product,
+                    relatedProducts,
+                    
                 });
+        } catch (error) {
+            res.render('error/index.ejs', {error});
+        }
+    },
+
+    async renderProducts(req, res, next){
+        try {
+            const products = await ProductModel.find({}).populate('images');
+            const categories = await CategoryModel.find({});
+            res.render('products/index.ejs',
+                {
+                    title: 'Sản phẩm',
+                    cssPath: '/css/products/index.product.css',
+                    products, 
+                    categories,
+                });
+        } catch (error) {
+            res.render('error/index.ejs', {error});
+        }
+        
+    },
+
+    async getProductsByCategory(req, res, next){
+        try {
+            const {id} = req.params;
+            const products = await ProductModel.find({category: id});
+            const categories = await CategoryModel.find({});
+            res.render('products/index.ejs',
+                {
+                    title: 'Sản phẩm theo danh mục',
+                    cssPath: '/css/products/index.product.css',
+                    active: `${id}`,
+                    products,
+                    categories,
+                })
         } catch (error) {
             res.render('error/index.ejs', {error});
         }
@@ -57,23 +101,6 @@ const ProductController = {
         
     },
 
-    async getAll(req, res, next){
-        try {
-            const products = await ProductModel.find({}).populate('images');
-            const categories = await CategoryModel.find({});
-            res.render('products/index.ejs',
-                {
-                    title: 'Sản phẩm',
-                    cssPath: '/css/products/index.product.css',
-                    products, 
-                    categories,
-                    
-                });
-        } catch (error) {
-            res.render('error/index.ejs', {error});
-        }
-        
-    },
 
     async updateProduct(req, res, next){
         try {
