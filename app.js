@@ -19,7 +19,7 @@ const passport = require('passport');
 const ExpressError = require('./src/utils/expressError');
 const MongoStore = require('connect-mongo');
 const CategoryModel = require('./src/models/category.model');
-
+const ProductModel = require('./src/models/product.model');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
@@ -82,12 +82,14 @@ app.use('/user', userRouter);
 
 app.get('/home', async(req, res)=>{
     const categories = await CategoryModel.find({});
-    
+    const products = await ProductModel.find({}).limit(4);
     res.render('home.view.ejs', 
         {
-            categories, 
+            
             title: 'Trang chủ', 
-            cssPath: 'css/home.view.css'
+            cssPath: 'css/home.view.css',
+            categories, 
+            products,
         });
 })
 
