@@ -10,7 +10,7 @@ const multer = require('multer');
 const upload = multer({storage: storage});
 
 //trang sản phẩm
-router.get('/', ProductController.getAll);
+router.get('/', ProductController.renderProducts);
 
 //form tạo mới sản phẩm
 router.get('/new', ProductController.renderCreate);
@@ -20,6 +20,9 @@ router.get('/:id/edit', ProductController.renderUpdate);
 
 //form chi tiết sản phẩm
 router.get('/:id', ProductController.renderDetails);
+
+//form sản phẩm theo category
+router.get('/category/:id', ProductController.getProductsByCategory)
 
 router.put('/:id/favorite', ProductController.updateFavorite);
 

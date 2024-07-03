@@ -19,6 +19,7 @@ const passport = require('passport');
 const ExpressError = require('./src/utils/expressError');
 const MongoStore = require('connect-mongo');
 const CategoryModel = require('./src/models/category.model');
+const ProductModel = require('./src/models/product.model');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
@@ -64,7 +65,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 app.use(passport.initialize());
-app.use(passport.session())
+app.use(passport.session());
 
 app.use((req, res, next)=>{
     res.locals.currentUser = req.user;
@@ -81,18 +82,30 @@ app.use('/user', userRouter);
 
 app.get('/home', async(req, res)=>{
     const categories = await CategoryModel.find({});
-    
+    const products = await ProductModel.find({}).limit(4);
     res.render('home.view.ejs', 
         {
-            categories, 
+            
             title: 'Trang chủ', 
-            cssPath: 'css/home.view.css'
+            cssPath: 'css/home.view.css',
+            categories, 
+            products,
         });
 })
 
 app.get('/dashboard', (req, res)=>{
     res.render('dashboard.view.ejs');
 })
+
+app.all('*', (req, res, next) => {
+    res.render('test.ejs',
+        {
+            title:'test',
+            cssPath: 'test'
+        });
+    
+})
+
 
 
 app.listen(3000, ()=>{

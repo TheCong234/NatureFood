@@ -1,77 +1,115 @@
 <% layout('../layouts/boilplates.ejs') %>
-    <form action="/product/<%=product.id %>/favorite?_method=put" method="post">
-        <button type="submit">Thêm vào yêu thích</button>
-    </form>
+<div class="container">
+    <!-- <form action="/product/<%=product.id %>/favorite?_method=put" method="post">
+        <button class="add-favorite" type="submit">Thêm vào yêu thích</button>
+    </form> -->
 
-    <div>
-        <h1>product details page</h1>
-        <div>
-            <label for="">Tên sản phẩm</label>
-            <p>
-                <%=product.title %>
-            </p>
-        </div>
-        <div>
-            <label for="">Giá / chai</label>
-            <p>
-                <%=product.price %>
-            </p>
-        </div>
-        <div>
-            <label for="">Mô tả</label>
-            <p>
-                <%=product.description %>
-            </p>
-        </div>
-        <div>
-            <label for="">Cân nặng / chai</label>
-            <p>
-                <%=product.weight %>
-            </p>
-        </div>
-        <div>
-            <label for="">Số lượng tồn / chai</label>
-            <p>
-                <%=product.inventory %>
-            </p>
-        </div>
-        <div>
-            <label for="">Dánh giá sản phẩm</label>
-            <% if(product.reviews.length > 0){ %>
-                <% for (let review of product.reviews){ %>
-                    <div>
-                        <p>Rating: <%= review.rating %>
-                        </p>
-                        <p>Nội dung: <%= review.body %>
-                        </p>
-                        <p>Feedback: <%=review.feedback %>
-                        </p>
-                        <form action="/product/<%=product._id %>/review/<%=review._id %>?_method=delete" method="post">
-                            <button type="submit">Delete</button>
-                        </form>
+    <main>
+        <header class="">
+            <div class="product-images">
+                <div class="products-images__container">
+                    <div class="image-list">
+                        <% for (let image of product.images){ %>
+                            <div class="image-thumbnail">
+                                <img src="<%=image.url %>" alt="product image" height="200">
+                            </div>
+                        <% } %>
                     </div>
-            <% }}else{ %>
-                <p>Chưa có đánh giá nào</p>
-            <% } %>
-        </div>
+                    <button class="button-direction prev" onclick="prevSlide()"><i class="fa-solid fa-angle-up"></i></button>
+                    <button class="button-direction next" onclick="nextSlide()"><i class="fa-solid fa-angle-down"></i></button>
+                </div>
+                <div class="image-show">
+                    <button class="add-favorite" type="submit">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                    <% for (let image of product.images){ %>
+                        <img src="<%=image.url %>" alt="product image">
+                    <% break} %>
+                </div>
+            </div>
 
-        <div>
-            <label for="">Ảnh sản phẩm</label>
-            <% for (let image of product.images){ %>
-                <img src="<%=image.url %>" alt="product image" height="200">
+            <div class="product-details">
+                
+                <h1><%=product.title %></h1>
+                <ul class="overview-group">
+                    <li>&#9733;(4.9)</li>
+                    <li><%=product.inventory %> còn</li>
+                    <li>Đơn vị tính: </li>
+                </ul>
+                <div class="product-price"><small>₫</small><%=(product.price.toLocaleString('vi-VN')) %></div>
+                <div class="product-weight">Trọng lượng: <%=product.weight %></div>
+                
+                <h3>Mô tả</h3>
+                <div class="product-description">
+                    <%=product.description %>
+                </div>
+                <div>
+                    <button class="button-normal">Thêm vào giỏ hàng</button>
+                    <button class="button-primary">Mua ngay</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- review -->
+        <div class="content-review">
+            <h1 class="content-review__title">Đánh giá sản phẩm</h1>
+            <form action="/product/<%= product._id %>/review" method="post">
+                <div>
+                    <span >Rating</span>
+                    <input type="range" value="5" max="5" min="1" name="review[rating]">
+                </div>
+                <div>
+                    <p >Nội dung đánh giá</p>
+                    <textarea name="review[body]" id="body" rows="5" cols="100%"></textarea>
+                </div>
+                <button type="submit" class="button-primary">Thêm đánh giá</button>
+            </form>
+            
+            <div class="review-list">
+                <% if(product.reviews.length > 0){ %>
+                    <% for (let review of product.reviews){ %>
+                        <div class="review-item">
+                            <p>Rating: <%= review.rating %>
+                            </p>
+                            <p>Nội dung: <%= review.body %>
+                            </p>
+                            <p>Feedback: <%=review.feedback %>
+                            </p>
+                            <form action="/product/<%=product._id %>/review/<%=review._id %>?_method=delete" method="post">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                <% }}else{ %>
+                    <p>Chưa có đánh giá nào</p>
                 <% } %>
+
+            </div>
         </div>
 
-        <form action="/product/<%= product._id %>/review" method="post">
-            <div>
-                <label for="">Rating</label>
-                <input type="range" value="5" max="5" min="1" name="review[rating]">
+        <!-- related products -->
+        <div class="content-relatedProduct">
+            <div class="relatedProduct-list">
+                <% for(let relatedProduct of relatedProducts){ %>
+                <a class="products-card" href="/product/<%=relatedProduct._id %>">
+                    <% for(let img of relatedProduct.images){ %>
+                        <div class="image">
+                            <img src="<%=img.url %>" alt="Ảnh SP">
+                        </div>
+                    <% break} %>
+                    <p class="card-product__title"><%=relatedProduct.title %></p>
+                    <span class="card-product__weight">Trọng lượng: <strong><%=relatedProduct.weight %></strong></span>
+                    <div class="group__price-unit">
+                        <span class="card-product__price"><small>₫</small><%=(relatedProduct.price).toLocaleString('vi-VN') %></span>
+                        <span class="card-product__unit">Đơn vị tính</span>
+                    </div>
+                </a>
+                <% } %>
             </div>
-            <div>
-                <label for="">Nội dung đánh giá</label>
-                <textarea name="review[body]" id="body" rows="5" cols="100%"></textarea>
-            </div>
-            <button type="submit">Thêm đánh giá</button>
-        </form>
+            <button class="button-direction prev" onclick="prevRelatedProductSlide()"><i class="fa-solid fa-angle-left"></i></button>
+            <button class="button-direction next" onclick="nextRelatedProductSlide()"><i class="fa-solid fa-angle-right"></i></button>
+        </div>
+    </main>
 
-    </div>
+</div>
+
+<script src="/js/details.product.js"></script>
