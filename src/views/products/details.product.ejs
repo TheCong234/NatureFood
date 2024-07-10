@@ -69,15 +69,40 @@
                 <% if(product.reviews.length > 0){ %>
                     <% for (let review of product.reviews){ %>
                         <div class="review-item">
-                            <p>Rating: <%= review.rating %>
-                            </p>
-                            <p>Nội dung: <%= review.body %>
-                            </p>
-                            <p>Feedback: <%=review.feedback %>
-                            </p>
-                            <form action="/product/<%=product._id %>/review/<%=review._id %>?_method=delete" method="post">
-                                <button type="submit">Delete</button>
-                            </form>
+                            <div class="review-header">
+                                <div class="author-info">
+                                    <img src="<%=review.author.image.url %>" alt="Ảnh đại diện">
+                                    <div>
+                                        <h3><%=review.author.username %></h3>
+                                            <% let date = `${review.createAt.getDay() + "/" + review.createAt.getMonth() + "/" + review.createAt.getFullYear()} ` %>
+                                        <p><%= date %></p>
+                                    </div>
+                                </div>
+                                <div class="star-group">
+                                    <% for(let i = 0; i < 5; i++){ %>
+                                        <% if(i < review.rating ){ %>
+                                                <span class="star-solid">
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                        <% }else{ %>
+                                            <span class="star-regular">
+                                                <i class="fa-regular fa-star"></i>
+                                            </span>
+                                            
+                                    <% }} %>
+                                </div>
+                            </div>
+                            
+                            <p class="review-body"><%= review.body %></p>
+                            <p>Feedback: <%=review.feedback %></p>
+                            <div class="review-controls">
+                                <form action="/product/<%=product._id %>/review/<%=review._id %>?_method=put" method="post">
+                                    <button type="submit" class="review-btn review-btn__edit">Chỉnh sửa</button>
+                                </form>
+                                <form action="/product/<%=product._id %>/review/<%=review._id %>?_method=delete" method="post">
+                                    <button type="submit" class="review-btn review-btn__delete">Xóa</button>
+                                </form>
+                            </div>
                         </div>
                 <% }}else{ %>
                     <p>Chưa có đánh giá nào</p>

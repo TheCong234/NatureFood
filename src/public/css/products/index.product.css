@@ -153,7 +153,7 @@ header{
 .content-main__products{
     margin-top: 10px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
 
     gap: 10px;
 }
@@ -164,6 +164,7 @@ header{
     display: flex;
     justify-content: center;
     height: 32px;
+    margin-top: 20px;
     .pagination-options{
         color: rgb(77, 74, 74);
         height: 100%;
