@@ -38,7 +38,12 @@ const ProductController = {
     async renderDetails(req, res, next){
         try {
             const {id} = req.params;
-            const product = await ProductModel.findById(id).populate('reviews');
+            const product = await ProductModel.findById(id).populate({
+                path: 'reviews',
+                populate: {
+                    path: 'author',
+                }
+            });
             const relatedProducts = await ProductModel.find({category: product.category}).limit(10).populate('images');
             res.render('products/details.product.ejs', 
                 {

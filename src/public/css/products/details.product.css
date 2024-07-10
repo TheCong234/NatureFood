@@ -141,14 +141,65 @@ header{
     .content-review__title{
         margin-bottom: 20px;
     }
-    .review-list{
-        margin-top: 10px;
-        .review-item{
-            border-bottom: 1px solid grey;
-        }
-    }
-
 }
+
+.review-list{
+    margin-top: 10px;
+}
+.review-item{
+    border-bottom: 1px solid grey;
+    padding: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.review-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.review-header > .author-info{
+    display: flex;
+}
+.review-header > .author-info > img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.review-header > .author-info > div > h3{
+    margin: 6px 0;
+}
+.review-header > .author-info > div > p{
+    font-weight: normal;
+    font-size: 12px;
+}
+.star-group{
+    color: rgb(214, 214, 18);
+}
+
+
+.review-body{
+    margin: 10px 0;
+}
+.review-controls{
+    display: flex;
+    justify-content: end;
+}
+.review-btn{
+    font-size: 16px;
+    padding: 6px 12px;
+    margin-left: 15px;
+    border: 1px solid grey;
+    border-radius: 4px;
+}
+.review-btn__edit{
+    background-color: orange;
+    color: white;
+}
+.review-btn__delete{
+    background-color: red;
+    color: white;
+}
+
 
 /* related products */
 .content-relatedProduct{
